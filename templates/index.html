@@ -1,0 +1,127 @@
+{% extends "base.html" %} {% block title %}Início - Personal Data Visualizer{%
+endblock %} {% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <!-- Hero Section -->
+    <div class="hero-section text-center mb-5">
+      <div class="hero-icon mb-4">
+        <i class="fas fa-chart-pie fa-5x text-primary"></i>
+      </div>
+      <h1 class="display-4 mb-3">Personal Data Visualizer</h1>
+      <p class="lead text-muted mb-4">
+        Transforme seus dados pessoais em insights poderosos e visualizações
+        interativas
+      </p>
+      <div class="row g-4 mb-5">
+        <div class="col-md-3">
+          <div class="feature-card">
+            <i class="fab fa-spotify fa-2x text-success mb-2"></i>
+            <h6>Spotify</h6>
+            <small class="text-muted">Hábitos musicais</small>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="feature-card">
+            <i class="fab fa-github fa-2x text-dark mb-2"></i>
+            <h6>GitHub</h6>
+            <small class="text-muted">Atividade de código</small>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="feature-card">
+            <i class="fas fa-heartbeat fa-2x text-danger mb-2"></i>
+            <h6>Saúde</h6>
+            <small class="text-muted">Dados fitness</small>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="feature-card">
+            <i class="fas fa-gamepad fa-2x text-warning mb-2"></i>
+            <h6>Gaming</h6>
+            <small class="text-muted">Gamificação</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="row g-4 mb-5">
+      <div class="col-md-4">
+        <div class="card h-100 feature-highlight">
+          <div class="card-body text-center">
+            <i class="fas fa-chart-line fa-3x text-primary mb-3"></i>
+            <h5>Dashboard Interativo</h5>
+            <p class="text-muted">
+              Visualizações dinâmicas e em tempo real dos seus dados pessoais
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 feature-highlight">
+          <div class="card-body text-center">
+            <i class="fas fa-brain fa-3x text-success mb-3"></i>
+            <h5>Machine Learning</h5>
+            <p class="text-muted">
+              Análises inteligentes para prever tendências e padrões
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 feature-highlight">
+          <div class="card-body text-center">
+            <i class="fas fa-trophy fa-3x text-warning mb-3"></i>
+            <h5>Gamificação</h5>
+            <p class="text-muted">
+              Transforme seus dados em conquistas e desafios divertidos
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="text-center">
+      <div class="card cta-card">
+        <div class="card-body">
+          <h3 class="mb-3">Comece Agora!</h3>
+          <p class="text-muted mb-4">
+            Conecte sua conta do Spotify e descubra insights incríveis sobre
+            seus hábitos musicais
+          </p>
+          <a href="{{ url_for('login') }}" class="btn btn-success btn-lg px-5">
+            <i class="fab fa-spotify me-2"></i>
+            Conectar com Spotify
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coming Soon -->
+    <div class="row g-3 mt-5">
+      <div class="col-12">
+        <h4 class="text-center mb-4 text-muted">Em Breve</h4>
+      </div>
+      <div class="col-md-4 text-center">
+        <div class="coming-soon-item">
+          <i class="fab fa-github fa-2x text-muted mb-2"></i>
+          <h6 class="text-muted">GitHub Integration</h6>
+        </div>
+      </div>
+      <div class="col-md-4 text-center">
+        <div class="coming-soon-item">
+          <i class="fab fa-google fa-2x text-muted mb-2"></i>
+          <h6 class="text-muted">Google Fit</h6>
+        </div>
+      </div>
+      <div class="col-md-4 text-center">
+        <div class="coming-soon-item">
+          <i class="fas fa-more-horizontal fa-2x text-muted mb-2"></i>
+          <h6 class="text-muted">Mais APIs</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

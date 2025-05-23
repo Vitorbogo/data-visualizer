@@ -1,0 +1,6 @@
+flask>=2.3.0
+python-dotenv>=1.0.0
+requests>=2.31.0
+spotipy>=2.23.0
+plotly>=5.16.0
+python-dateutil>=2.8.0

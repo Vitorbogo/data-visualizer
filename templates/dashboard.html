@@ -1,0 +1,495 @@
+{% extends "base.html" %} {% block title %}Dashboard - Personal Data
+Visualizer{% endblock %} {% block content %} {% if user %}
+<!-- User Header -->
+<div class="row mb-4">
+  <div class="col-12">
+    <div class="card welcome-card">
+      <div class="card-body">
+        <div class="row align-items-center">
+          <div class="col-auto">
+            {% if user.images and user.images[0] %}
+            <img
+              src="{{ user.images[0].url }}"
+              alt="Profile"
+              class="rounded-circle"
+              width="80"
+              height="80"
+            />
+            {% else %}
+            <div class="profile-placeholder">
+              <i class="fas fa-user fa-2x"></i>
+            </div>
+            {% endif %}
+          </div>
+          <div class="col">
+            <h2 class="mb-1">Olá, {{ user.display_name }}! 👋</h2>
+            <p class="text-muted mb-0">
+              <i class="fab fa-spotify text-success me-1"></i>
+              {{ user.followers.total }} seguidores no Spotify
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Quick Stats -->
+{% if analysis %}
+<div class="row g-3 mb-4">
+  <div class="col-md-3">
+    <div class="card stat-card">
+      <div class="card-body text-center">
+        <i class="fas fa-music fa-2x text-primary mb-2"></i>
+        <h3 class="mb-1">{{ analysis.total_tracks }}</h3>
+        <small class="text-muted">Top Tracks</small>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card stat-card">
+      <div class="card-body text-center">
+        <i class="fas fa-microphone fa-2x text-success mb-2"></i>
+        <h3 class="mb-1">{{ analysis.total_artists }}</h3>
+        <small class="text-muted">Top Artists</small>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card stat-card">
+      <div class="card-body text-center">
+        <i class="fas fa-star fa-2x text-warning mb-2"></i>
+        <h3 class="mb-1">{{ analysis.top_genre|title }}</h3>
+        <small class="text-muted">Gênero Favorito</small>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card stat-card">
+      <div class="card-body text-center">
+        <i class="fas fa-fire fa-2x text-danger mb-2"></i>
+        <h3 class="mb-1">{{ analysis.recent_activity }}</h3>
+        <small class="text-muted">Atividade</small>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- Charts Row -->
+<div class="row g-4 mb-4">
+  <div class="col-lg-6">
+    <div class="card chart-card">
+      <div class="card-header">
+        <h5 class="mb-0">
+          <i class="fas fa-chart-pie me-2"></i>
+          Distribuição de Gêneros
+        </h5>
+      </div>
+      <div class="card-body">
+        <canvas id="genresChart"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card chart-card">
+      <div class="card-header">
+        <h5 class="mb-0">
+          <i class="fas fa-clock me-2"></i>
+          Horários de Escuta
+        </h5>
+      </div>
+      <div class="card-body">
+        <canvas id="timeChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Audio Features Chart -->
+<div class="row g-4 mb-4">
+  <div class="col-12">
+    <div class="card chart-card">
+      <div class="card-header">
+        <h5 class="mb-0">
+          <i class="fas fa-music me-2"></i>
+          Características das Suas Músicas
+        </h5>
+        <small class="text-muted">Análise das características sonoras das suas top tracks</small>
+      </div>
+      <div class="card-body">
+        <div class="mobile-chart-wrapper">
+          <canvas id="audioFeaturesChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Top Lists -->
+<div class="row g-4 mb-4">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">
+          <i class="fas fa-music me-2"></i>
+          Top Músicas
+        </h5>
+      </div>
+      <div class="card-body">
+        {% if top_tracks %}
+        <div class="track-list">
+          {% for track in top_tracks %}
+          <div class="track-item">
+            <div class="row align-items-center">
+              <div class="col-auto">
+                {% if track.album.images and track.album.images[0] %}
+                <img
+                  src="{{ track.album.images[0].url }}"
+                  alt="Album"
+                  class="track-image"
+                />
+                {% else %}
+                <div class="track-placeholder">
+                  <i class="fas fa-music"></i>
+                </div>
+                {% endif %}
+              </div>
+              <div class="col">
+                <h6 class="mb-1">{{ track.name }}</h6>
+                <small class="text-muted">{{ track.artists[0].name }}</small>
+              </div>
+              <div class="col-auto">
+                <span class="badge bg-primary">{{ track.popularity }}%</span>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-muted text-center">Nenhuma música encontrada</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">
+          <i class="fas fa-microphone me-2"></i>
+          Top Artistas
+        </h5>
+      </div>
+      <div class="card-body">
+        {% if top_artists %}
+        <div class="artist-list">
+          {% for artist in top_artists %}
+          <div class="artist-item">
+            <div class="row align-items-center">
+              <div class="col-auto">
+                {% if artist.images and artist.images[0] %}
+                <img
+                  src="{{ artist.images[0].url }}"
+                  alt="Artist"
+                  class="artist-image"
+                />
+                {% else %}
+                <div class="artist-placeholder">
+                  <i class="fas fa-user"></i>
+                </div>
+                {% endif %}
+              </div>
+              <div class="col">
+                <h6 class="mb-1">{{ artist.name }}</h6>
+                <small class="text-muted">
+                  {{ artist.followers.total|int|string + ' seguidores' if
+                  artist.followers else 'Artista' }}
+                </small>
+              </div>
+              <div class="col-auto">
+                <span class="badge bg-success">{{ artist.popularity }}%</span>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-muted text-center">Nenhum artista encontrado</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% else %}
+<div class="text-center">
+  <div class="card">
+    <div class="card-body">
+      <i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>
+      <h3>Erro ao carregar dados</h3>
+      <p class="text-muted mb-4">
+        Não foi possível carregar seus dados do Spotify
+      </p>
+      <a href="{{ url_for('login') }}" class="btn btn-primary">
+        <i class="fab fa-spotify me-2"></i>
+        Tentar Novamente
+      </a>
+    </div>
+  </div>
+</div>
+{% endif %} {% endblock %} {% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+<script>
+  // Inicializar charts quando a página carregar
+  document.addEventListener('DOMContentLoaded', function () {
+    // Chart de gêneros
+    loadGenresChart()
+
+    // Chart de horários
+    loadTimeChart()
+
+    // Chart de características de áudio
+    loadAudioFeaturesChart()
+  })
+
+  function loadGenresChart() {
+    fetch('/api/charts/genres')
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.labels && data.values) {
+          createPieChart(
+            'genresChart',
+            data.labels,
+            data.values,
+            'Gêneros Musicais'
+          )
+        }
+      })
+      .catch((error) =>
+        console.error('Erro ao carregar gráfico de gêneros:', error)
+      )
+  }
+
+  function loadTimeChart() {
+    fetch('/api/charts/listening_time')
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.labels && data.values) {
+          createLineChart(
+            'timeChart',
+            data.labels,
+            data.values,
+            'Horários de Escuta'
+          )
+        }
+      })
+      .catch((error) =>
+        console.error('Erro ao carregar gráfico de horários:', error)
+      )
+  }
+
+  function loadAudioFeaturesChart() {
+    fetch('/api/charts/audio_features')
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.labels && data.values && data.labels.length > 0) {
+          createRadarChart(
+            'audioFeaturesChart',
+            data.labels,
+            data.values,
+            'Características das Suas Músicas'
+          )
+        } else {
+          showChartPlaceholder('audioFeaturesChart', 'Sem dados de características disponíveis')
+        }
+      })
+      .catch((error) => {
+        console.error('Erro ao carregar características de áudio:', error)
+        showChartError('audioFeaturesChart', 'Erro ao carregar características')
+      })
+  }
+
+  function createPieChart(canvasId, labels, data, title) {
+    const ctx = document.getElementById(canvasId).getContext('2d')
+    new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            data: data,
+            backgroundColor: [
+              '#FF6384',
+              '#36A2EB',
+              '#FFCE56',
+              '#4BC0C0',
+              '#9966FF',
+              '#FF9F40',
+              '#FF6384',
+              '#C9CBCF',
+              '#4BC0C0',
+              '#FF6384',
+            ],
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: title,
+          },
+          legend: {
+            position: 'bottom',
+          },
+        },
+      },
+    })
+  }
+
+  function createLineChart(canvasId, labels, data, title) {
+    const ctx = document.getElementById(canvasId).getContext('2d')
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Músicas Tocadas',
+            data: data,
+            borderColor: '#1DB954',
+            backgroundColor: 'rgba(29, 185, 84, 0.1)',
+            tension: 0.4,
+            fill: true,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: title,
+          },
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    })
+  }
+
+  function createRadarChart(canvasId, labels, data, title) {
+    const canvas = document.getElementById(canvasId)
+    if (!canvas) return
+
+    const ctx = canvas.getContext('2d')
+    
+    new Chart(ctx, {
+      type: 'radar',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Suas Músicas',
+            data: data,
+            borderColor: '#1DB954',
+            backgroundColor: 'rgba(29, 185, 84, 0.2)',
+            pointBackgroundColor: '#1DB954',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2,
+            pointRadius: 5,
+            pointHoverRadius: 7,
+            borderWidth: 2,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: true,
+            text: title,
+            font: {
+              size: 16,
+              weight: 'bold'
+            }
+          },
+          legend: {
+            display: false,
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const label = context.label || '';
+                const value = (context.parsed.r * 100).toFixed(1);
+                return `${label}: ${value}%`;
+              }
+            }
+          }
+        },
+        scales: {
+          r: {
+            beginAtZero: true,
+            max: 1,
+            min: 0,
+            ticks: {
+              stepSize: 0.2,
+              callback: function(value) {
+                return (value * 100).toFixed(0) + '%';
+              },
+              font: {
+                size: 10
+              }
+            },
+            grid: {
+              color: 'rgba(0, 0, 0, 0.1)',
+            },
+            pointLabels: {
+              font: {
+                size: 12,
+                weight: 'bold'
+              },
+              color: '#333'
+            },
+          },
+        },
+      },
+    })
+  }
+
+  function showChartPlaceholder(canvasId, message) {
+    const canvas = document.getElementById(canvasId)
+    if (!canvas) return
+
+    const container = canvas.parentElement
+    container.innerHTML = `
+      <div class="error-state text-center py-4">
+        <i class="fas fa-chart-bar fa-3x text-muted mb-3"></i>
+        <p class="mb-0 text-muted">${message}</p>
+      </div>
+    `
+  }
+
+  function showChartError(canvasId, message) {
+    const canvas = document.getElementById(canvasId)
+    if (!canvas) return
+
+    const container = canvas.parentElement
+    container.innerHTML = `
+      <div class="error-state text-center py-4">
+        <i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>
+        <p class="mb-2 text-muted">${message}</p>
+        <button class="btn btn-sm btn-outline-secondary" onclick="loadAudioFeaturesChart()">
+          <i class="fas fa-refresh me-1"></i>Tentar Novamente
+        </button>
+      </div>
+    `
+  }
+</script>
+{% endblock %}
