@@ -3,6 +3,9 @@
 Um dashboard interativo para visualizar e analisar seus dados pessoais, começando com a integração do Spotify.
 Projeto que dei inicio na faculdade porém abandonei e decidi testar fazer o mesmo projeto utilizando python no backend
 
+![image](https://github.com/user-attachments/assets/b91ace0f-b7a3-4ad2-9d24-ed3c7e5058b1)
+
+
 ## 🚀 Funcionalidades
 
 - 🎵 **Integração Spotify**: Conecta com sua conta Spotify para analisar seus hábitos musicais
