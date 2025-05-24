@@ -122,8 +122,4 @@ python app.py
 - Verifique se a porta 5000 não está sendo usada por outro processo
 - Tente mudar a porta no `app.py`: `app.run(port=5001)`
 
-## 📄 Licença
-
-Este projeto é open source e está disponível sob a [MIT License](LICENSE).
-
 ---
