@@ -71,7 +71,8 @@ class SpotifyClient:
       if response.status_code == 200:
         return response.json()
       else:
-        print(f"Erro ao renovar token: {response.status_code} - {response.text}")
+        print(
+          f"Erro ao renovar token: {response.status_code} - {response.text}")
         return None
     except requests.RequestException as e:
       print(f"Erro de conexão ao renovar token: {e}")
@@ -87,7 +88,7 @@ class SpotifyClient:
     for attempt in range(retries):
       try:
         response = requests.get(f"https://api.spotify.com/v1/{endpoint}",
-                              headers=headers, timeout=10)
+                                headers=headers, timeout=10)
 
         if response.status_code == 200:
           return response.json()
@@ -100,7 +101,8 @@ class SpotifyClient:
           print("Token de acesso inválido ou expirado")
           return None
         else:
-          print(f"Erro na API do Spotify: {response.status_code} - {response.text}")
+          print(
+            f"Erro na API do Spotify: {response.status_code} - {response.text}")
           return None
 
       except requests.RequestException as e:

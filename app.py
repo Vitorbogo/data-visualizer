@@ -32,39 +32,39 @@ spotify_client = SpotifyClient(
 
 
 def get_cached_data(key, access_token, fetch_function, *args):
-    """Função para gerenciar cache de dados"""
-    now = datetime.now()
-    cache_key = f"{key}_{access_token[:10]}"  # Usar parte do token como chave
-    
-    if cache_key in cache:
-        data, timestamp = cache[cache_key]
-        if now - timestamp < CACHE_DURATION:
-            return data
-    
-    # Buscar dados novos
-    fresh_data = fetch_function(access_token, *args)
-    if fresh_data:
-        cache[cache_key] = (fresh_data, now)
-    
-    return fresh_data
+  """Função para gerenciar cache de dados"""
+  now = datetime.now()
+  cache_key = f"{key}_{access_token[:10]}"  # Usar parte do token como chave
+
+  if cache_key in cache:
+    data, timestamp = cache[cache_key]
+    if now - timestamp < CACHE_DURATION:
+      return data
+
+  # Buscar dados novos
+  fresh_data = fetch_function(access_token, *args)
+  if fresh_data:
+    cache[cache_key] = (fresh_data, now)
+
+  return fresh_data
 
 
 def refresh_token_if_needed():
-    """Renova o token se necessário"""
-    if 'refresh_token' not in session:
-        return False
-    
-    try:
-        token_info = spotify_client.refresh_access_token(session['refresh_token'])
-        if token_info:
-            session['access_token'] = token_info['access_token']
-            if 'refresh_token' in token_info:
-                session['refresh_token'] = token_info['refresh_token']
-            return True
-    except Exception as e:
-        print(f"Erro ao renovar token: {e}")
-    
+  """Renova o token se necessário"""
+  if 'refresh_token' not in session:
     return False
+
+  try:
+    token_info = spotify_client.refresh_access_token(session['refresh_token'])
+    if token_info:
+      session['access_token'] = token_info['access_token']
+      if 'refresh_token' in token_info:
+        session['refresh_token'] = token_info['refresh_token']
+      return True
+  except Exception as e:
+    print(f"Erro ao renovar token: {e}")
+
+  return False
 
 
 @app.route('/')
@@ -111,18 +111,24 @@ def dashboard():
 
   try:
     # Buscar dados do usuário com cache
-    user_data = get_cached_data('user_profile', access_token, spotify_client.get_user_profile)
-    top_tracks = get_cached_data('top_tracks', access_token, spotify_client.get_top_tracks, 'medium_term', 50)
-    top_artists = get_cached_data('top_artists', access_token, spotify_client.get_top_artists, 'medium_term', 50)
-    recent_tracks = get_cached_data('recent_tracks', access_token, spotify_client.get_recently_played, 50)
+    user_data = get_cached_data(
+      'user_profile', access_token, spotify_client.get_user_profile)
+    top_tracks = get_cached_data(
+      'top_tracks', access_token, spotify_client.get_top_tracks, 'medium_term', 50)
+    top_artists = get_cached_data(
+      'top_artists', access_token, spotify_client.get_top_artists, 'medium_term', 50)
+    recent_tracks = get_cached_data(
+      'recent_tracks', access_token, spotify_client.get_recently_played, 50)
 
     # Verificar se algum dado falhou por token expirado
     if not user_data and refresh_token_if_needed():
-        access_token = session['access_token']
-        user_data = spotify_client.get_user_profile(access_token)
-        top_tracks = spotify_client.get_top_tracks(access_token, 'medium_term', 50)
-        top_artists = spotify_client.get_top_artists(access_token, 'medium_term', 50)
-        recent_tracks = spotify_client.get_recently_played(access_token, 50)
+      access_token = session['access_token']
+      user_data = spotify_client.get_user_profile(access_token)
+      top_tracks = spotify_client.get_top_tracks(
+        access_token, 'medium_term', 50)
+      top_artists = spotify_client.get_top_artists(
+        access_token, 'medium_term', 50)
+      recent_tracks = spotify_client.get_recently_played(access_token, 50)
 
     # Analisar dados
     analyzer = DataAnalyzer()
@@ -132,17 +138,18 @@ def dashboard():
     return render_template('dashboard.html',
                            user=user_data,
                            analysis=analysis,
-                           top_tracks=top_tracks['items'][:10] if top_tracks else [],
+                           top_tracks=top_tracks['items'][:10] if top_tracks else [
+                             ],
                            top_artists=top_artists['items'][:10] if top_artists else [])
 
   except Exception as e:
     print(f"Erro no dashboard: {e}")
     # Se o token expirou, tentar renovar
     if "401" in str(e) or "token" in str(e).lower():
-        if refresh_token_if_needed():
-            return redirect(url_for('dashboard'))
-        session.clear()
-        return redirect(url_for('login'))
+      if refresh_token_if_needed():
+        return redirect(url_for('dashboard'))
+      session.clear()
+      return redirect(url_for('login'))
     return render_template('dashboard.html', error="Erro ao carregar dados do Spotify")
 
 
@@ -167,15 +174,16 @@ def get_chart_data(chart_type):
       if not top_tracks or 'items' not in top_tracks:
         print("❌ Erro: Nenhuma track encontrada")
         return jsonify({'error': 'Nenhuma track encontrada'}), 404
-      
+
       track_ids = [track['id'] for track in top_tracks['items']]
       print(f"🎵 Encontradas {len(track_ids)} tracks para análise")
-      
-      audio_features = spotify_client.get_audio_features(access_token, track_ids)
+
+      audio_features = spotify_client.get_audio_features(
+        access_token, track_ids)
       if not audio_features:
         print("❌ Erro: Não foi possível obter características de áudio")
         return jsonify({'error': 'Erro ao obter características de áudio'}), 500
-      
+
       print(f"🎵 Características obtidas: {type(audio_features)}")
       analyzer = DataAnalyzer()
       features_data = analyzer.get_audio_features_summary(audio_features)
@@ -192,9 +200,9 @@ def get_chart_data(chart_type):
   except Exception as e:
     print(f"Erro ao buscar dados do gráfico {chart_type}: {e}")
     if "401" in str(e) or "token" in str(e).lower():
-        return jsonify({'error': 'Token expirado', 'redirect': '/login'}), 401
+      return jsonify({'error': 'Token expirado', 'redirect': '/login'}), 401
     elif "429" in str(e):
-        return jsonify({'error': 'Muitas requisições. Tente novamente em alguns segundos.'}), 429
+      return jsonify({'error': 'Muitas requisições. Tente novamente em alguns segundos.'}), 429
     return jsonify({'error': str(e)}), 500
 
   return jsonify({'error': 'Tipo de gráfico não encontrado'}), 404

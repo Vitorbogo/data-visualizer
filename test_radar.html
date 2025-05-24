@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teste - Gráfico Radar</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+      .chart-container {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      canvas {
+        max-height: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="chart-container">
+      <h2>🎵 Teste - Características de Áudio</h2>
+      <p>
+        Este é um exemplo de como o gráfico radar de características de áudio
+        deve aparecer:
+      </p>
+      <canvas id="testRadarChart"></canvas>
+    </div>
+
+    <script>
+      // Dados de exemplo para teste
+      const testData = {
+        labels: [
+          'Dançabilidade',
+          'Energia',
+          'Fala',
+          'Acústico',
+          'Instrumental',
+          'Ao Vivo',
+          'Positividade',
+        ],
+        values: [0.8, 0.7, 0.3, 0.2, 0.1, 0.15, 0.6],
+      }
+
+      // Criar gráfico radar de teste
+      const ctx = document.getElementById('testRadarChart').getContext('2d')
+      new Chart(ctx, {
+        type: 'radar',
+        data: {
+          labels: testData.labels,
+          datasets: [
+            {
+              label: 'Suas Músicas',
+              data: testData.values,
+              borderColor: '#1DB954',
+              backgroundColor: 'rgba(29, 185, 84, 0.2)',
+              pointBackgroundColor: '#1DB954',
+              pointBorderColor: '#fff',
+              pointBorderWidth: 2,
+              pointRadius: 5,
+              pointHoverRadius: 7,
+              borderWidth: 2,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Características das Suas Músicas',
+              font: {
+                size: 16,
+                weight: 'bold',
+              },
+            },
+            legend: {
+              display: false,
+            },
+            tooltip: {
+              callbacks: {
+                label: function (context) {
+                  const label = context.label || ''
+                  const value = (context.parsed.r * 100).toFixed(1)
+                  return `${label}: ${value}%`
+                },
+              },
+            },
+          },
+          scales: {
+            r: {
+              beginAtZero: true,
+              max: 1,
+              min: 0,
+              ticks: {
+                stepSize: 0.2,
+                callback: function (value) {
+                  return (value * 100).toFixed(0) + '%'
+                },
+                font: {
+                  size: 10,
+                },
+              },
+              grid: {
+                color: 'rgba(0, 0, 0, 0.1)',
+              },
+              pointLabels: {
+                font: {
+                  size: 12,
+                  weight: 'bold',
+                },
+                color: '#333',
+              },
+            },
+          },
+        },
+      })
+    </script>
+  </body>
+</html>

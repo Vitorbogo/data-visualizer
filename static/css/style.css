@@ -443,20 +443,44 @@ footer {
 }
 
 /* Mobile typography scaling */
-.mobile-h1 { font-size: 1.8rem; }
-.mobile-h2 { font-size: 1.5rem; }
-.mobile-h3 { font-size: 1.3rem; }
-.mobile-h4 { font-size: 1.1rem; }
-.mobile-h5 { font-size: 1rem; }
-.mobile-h6 { font-size: 0.9rem; }
+.mobile-h1 {
+  font-size: 1.8rem;
+}
+.mobile-h2 {
+  font-size: 1.5rem;
+}
+.mobile-h3 {
+  font-size: 1.3rem;
+}
+.mobile-h4 {
+  font-size: 1.1rem;
+}
+.mobile-h5 {
+  font-size: 1rem;
+}
+.mobile-h6 {
+  font-size: 0.9rem;
+}
 
 @media (max-width: 576px) {
-  .mobile-h1 { font-size: 1.6rem; }
-  .mobile-h2 { font-size: 1.3rem; }
-  .mobile-h3 { font-size: 1.1rem; }
-  .mobile-h4 { font-size: 1rem; }
-  .mobile-h5 { font-size: 0.9rem; }
-  .mobile-h6 { font-size: 0.8rem; }
+  .mobile-h1 {
+    font-size: 1.6rem;
+  }
+  .mobile-h2 {
+    font-size: 1.3rem;
+  }
+  .mobile-h3 {
+    font-size: 1.1rem;
+  }
+  .mobile-h4 {
+    font-size: 1rem;
+  }
+  .mobile-h5 {
+    font-size: 0.9rem;
+  }
+  .mobile-h6 {
+    font-size: 0.8rem;
+  }
 }
 
 /* Swipe indicators for mobile */

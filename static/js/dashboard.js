@@ -318,13 +318,13 @@ class DashboardManager {
           },
           tooltip: {
             callbacks: {
-              label: function(context) {
-                const label = context.label || '';
-                const value = (context.parsed.r * 100).toFixed(1);
-                return `${label}: ${value}%`;
-              }
-            }
-          }
+              label: function (context) {
+                const label = context.label || ''
+                const value = (context.parsed.r * 100).toFixed(1)
+                return `${label}: ${value}%`
+              },
+            },
+          },
         },
         scales: {
           r: {
@@ -333,13 +333,13 @@ class DashboardManager {
             min: 0,
             ticks: {
               stepSize: 0.2,
-              callback: function(value) {
-                return (value * 100).toFixed(0) + '%';
+              callback: function (value) {
+                return (value * 100).toFixed(0) + '%'
               },
               font: {
-                size: 10
+                size: 10,
               },
-              display: false  // Ocultar números no mobile
+              display: false, // Ocultar números no mobile
             },
             grid: {
               color: 'rgba(0, 0, 0, 0.1)',
@@ -347,9 +347,9 @@ class DashboardManager {
             pointLabels: {
               font: {
                 size: window.innerWidth < 768 ? 10 : 12,
-                weight: 'bold'
+                weight: 'bold',
               },
-              color: '#333'
+              color: '#333',
             },
           },
         },

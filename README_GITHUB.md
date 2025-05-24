@@ -11,7 +11,7 @@
 
 ![Dashboard Preview](https://via.placeholder.com/800x400/1DB954/ffffff?text=Personal+Data+Visualizer+Dashboard)
 
-*Dashboard principal mostrando análises musicais em tempo real*
+_Dashboard principal mostrando análises musicais em tempo real_
 
 ## 🌟 Funcionalidades
 
@@ -25,30 +25,35 @@
 ## 🛠️ Tech Stack
 
 ### Backend
+
 - **Python 3.12+** - Linguagem principal
 - **Flask 3.1+** - Framework web minimalista
 - **Spotipy 2.25+** - Cliente Python para Spotify API
 - **python-dotenv** - Gerenciamento de variáveis de ambiente
 
 ### Frontend
+
 - **HTML5 + CSS3 + JavaScript ES6** - Stack web moderna
 - **Bootstrap 5** - Framework CSS responsivo
 - **Chart.js** - Biblioteca de gráficos interativos
 - **Font Awesome** - Ícones
 
 ### Integrações
+
 - **Spotify Web API** - Dados musicais em tempo real
 - **OAuth 2.0** - Autenticação segura
 
 ## 🚀 Instalação e Uso
 
 ### 1. Clone o repositório
+
 ```bash
 git clone https://github.com/SEU_USERNAME/personal-data-visualizer.git
 cd personal-data-visualizer
 ```
 
 ### 2. Configure o ambiente
+
 ```bash
 # Criar ambiente virtual
 python3 -m venv venv
@@ -81,6 +86,7 @@ SECRET_KEY=sua_chave_secreta_flask_aqui
 ```
 
 ### 4. Execute a aplicação
+
 ```bash
 # Ativar ambiente virtual (se não estiver ativo)
 source venv/bin/activate
@@ -94,17 +100,21 @@ Acesse `http://localhost:5000` no seu navegador e conecte com sua conta Spotify!
 ## 📊 O que você vai descobrir
 
 ### 🎭 **Análise de Gêneros**
+
 - Distribuição dos seus gêneros musicais favoritos
 - Diversidade musical calculada automaticamente
 - Insights sobre seu perfil musical
 
 ### ⏰ **Padrões Temporais**
+
 - Horários de pico da sua atividade musical
 - Análise de quando você mais ouve música
 - Identificação de hábitos de escuta
 
 ### 🎯 **Características de Áudio**
+
 Análise detalhada de 7 características principais:
+
 - 🕺 **Dançabilidade** - O quão dançável são suas músicas
 - ⚡ **Energia** - Intensidade e atividade musical
 - 🗣️ **Fala** - Presença de elementos falados
@@ -114,6 +124,7 @@ Análise detalhada de 7 características principais:
 - 😊 **Positividade** - Sentimento positivo transmitido
 
 ### 🏆 **Sistema de Gamificação**
+
 - **Pontuação**: Baseada em diversidade, atividade e descobertas
 - **Níveis**: Iniciante → Entusiasta → Expert → Mestre da Música
 - **Conquistas**: Badges especiais por atingir marcos específicos
@@ -162,6 +173,7 @@ Contribuições são muito bem-vindas! Para contribuir:
 5. Abra um Pull Request
 
 ### Áreas que precisam de ajuda:
+
 - [ ] Integração com GitHub API
 - [ ] Dados de Google Fit/Health
 - [ ] Machine Learning para recomendações
