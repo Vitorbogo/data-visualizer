@@ -73,7 +73,7 @@ pip install -r requirements.txt
 2. Crie uma nova aplicação:
    - **App name**: Personal Data Visualizer
    - **App description**: Dashboard para análise de dados musicais
-   - **Website**: http://localhost:5000
+   - **Website**: http://127.0.0.1:5000
    - **Redirect URI**: http://127.0.0.1:5000/callback
 3. Copie o Client ID e Client Secret
 4. Crie um arquivo `.env` baseado no `.env.example`:
@@ -95,7 +95,7 @@ source venv/bin/activate
 python app.py
 ```
 
-Acesse `http://localhost:5000` no seu navegador e conecte com sua conta Spotify!
+Acesse `http://127.0.0.1:5000` no seu navegador e conecte com sua conta Spotify!
 
 ## 📊 O que você vai descobrir
 

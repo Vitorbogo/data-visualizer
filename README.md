@@ -37,7 +37,7 @@ pip install -r requirements.txt
 3. Preencha os dados:
    - **App name**: Personal Data Visualizer
    - **App description**: Dashboard para análise de dados musicais
-   - **Website**: http://localhost:5000
+   - **Website**: http://127.0.0.1:5000
    - **Redirect URI**: http://127.0.0.1:5000/callback
 4. Aceite os termos e crie o app
 5. Copie Client ID e Client Secret

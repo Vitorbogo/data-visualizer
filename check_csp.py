@@ -125,6 +125,6 @@ if __name__ == "__main__":
 
   if templates_ok and csp_ok:
     print("\n🎉 TUDO OK! O erro de CSP deve estar resolvido.")
-    print("🌐 Teste acessando: http://localhost:5000")
+    print("🌐 Teste acessando: http://127.0.0.1:5000")
   else:
     print("\n⚠️  Ainda há problemas a resolver.")
