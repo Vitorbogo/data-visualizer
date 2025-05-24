@@ -19,6 +19,14 @@ class DashboardManager {
       refreshBtn.addEventListener('click', () => this.refreshAllData())
     }
 
+    // Retry buttons with data-action attribute
+    document.addEventListener('click', (event) => {
+      if (event.target.closest('[data-action="retry-audio-features"]')) {
+        console.log('🔄 Retry button clicked for audio features')
+        this.loadAudioFeaturesChart()
+      }
+    })
+
     // Chart resize handling
     window.addEventListener('resize', () => {
       Object.values(this.charts).forEach((chart) => {

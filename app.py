@@ -11,6 +11,33 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', 'dev-secret-key-change-in-production')
 
+# Configurar Content Security Policy permissiva para desenvolvimento
+
+
+@app.after_request
+def after_request(response):
+  # CSP permissiva para desenvolvimento - permite scripts inline e CDNs
+  csp = (
+      "default-src 'self'; "
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' "
+      "https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; "
+      "style-src 'self' 'unsafe-inline' "
+      "https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; "
+      "img-src 'self' data: https: blob:; "
+      "font-src 'self' https://cdnjs.cloudflare.com; "
+      "connect-src 'self' https://api.spotify.com; "
+      "frame-src 'none';"
+  )
+  response.headers['Content-Security-Policy'] = csp
+
+  # Headers de segurança adicionais
+  response.headers['X-Content-Type-Options'] = 'nosniff'
+  response.headers['X-Frame-Options'] = 'DENY'
+  response.headers['X-XSS-Protection'] = '1; mode=block'
+
+  return response
+
+
 # Cache simples para dados
 cache = {}
 CACHE_DURATION = timedelta(minutes=5)  # Cache por 5 minutos
