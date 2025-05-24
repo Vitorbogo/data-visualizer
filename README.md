@@ -38,7 +38,7 @@ pip install -r requirements.txt
    - **App name**: Personal Data Visualizer
    - **App description**: Dashboard para análise de dados musicais
    - **Website**: http://localhost:5000
-   - **Redirect URI**: http://localhost:5000/callback
+   - **Redirect URI**: http://127.0.0.1:5000/callback
 4. Aceite os termos e crie o app
 5. Copie Client ID e Client Secret
 6. Crie um arquivo `.env` na raiz do projeto:
@@ -46,7 +46,7 @@ pip install -r requirements.txt
 ```env
 SPOTIFY_CLIENT_ID=seu_client_id_aqui
 SPOTIFY_CLIENT_SECRET=seu_client_secret_aqui
-SPOTIFY_REDIRECT_URI=http://localhost:5000/callback
+SPOTIFY_REDIRECT_URI=http://127.0.0.1:5000/callback
 SECRET_KEY=sua_chave_secreta_flask_aqui
 ```
 

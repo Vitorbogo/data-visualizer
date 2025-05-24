@@ -8,10 +8,12 @@ def setup_spotify_credentials():
   print("🎵 CONFIGURAÇÃO DO SPOTIFY API")
   print("=" * 50)
   print()
+  print("⚠️  IMPORTANTE: Nova política do Spotify (Maio 2025)")
   print("1. Acesse: https://developer.spotify.com/dashboard")
   print("2. Crie um novo App com as seguintes configurações:")
   print("   - Nome: Personal Data Visualizer")
-  print("   - Redirect URI: http://localhost:5000/callback")
+  print("   - Redirect URI: http://127.0.0.1:5000/callback")
+  print("   📋 NÃO use localhost - use 127.0.0.1")
   print("3. Obtenha Client ID e Client Secret")
   print()
 
