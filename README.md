@@ -6,15 +6,15 @@ Projeto que dei inicio na faculdade porém abandonei e decidi testar fazer o mes
 ![image](https://github.com/user-attachments/assets/b91ace0f-b7a3-4ad2-9d24-ed3c7e5058b1)
 
 
-## 🚀 Funcionalidades
+## Funcionalidades
 
-- 🎵 **Integração Spotify**: Conecta com sua conta Spotify para analisar seus hábitos musicais
-- 📊 **Dashboard Interativo**: Visualizações dinâmicas dos seus dados com Chart.js
-- 🎯 **Gráfico Radar de Características**: Análise visual das características sonoras das suas músicas (NEW! ✨)
-- 📈 **Análise de Padrões**: Identifica tendências nos seus hábitos de escuta
-- 🎮 **Gamificação**: Sistema de pontuação e conquistas baseado nos seus dados musicais
-- 📱 **Totalmente Responsivo**: Interface otimizada para mobile com design moderno
-- ⚡ **Performance Otimizada**: Sistema de cache inteligente para reduzir chamadas à API
+- **Integração Spotify**: Conecta com sua conta Spotify para analisar seus hábitos musicais
+- **Dashboard Interativo**: Visualizações dinâmicas dos seus dados com Chart.js
+- **Gráfico Radar de Características**: Análise visual das características sonoras das suas músicas (NEW! ✨)
+- **Análise de Padrões**: Identifica tendências nos seus hábitos de escuta
+- **Gamificação**: Sistema de pontuação e conquistas baseado nos seus dados musicais
+- **Totalmente Responsivo**: Interface otimizada para mobile com design moderno
+- **Performance Otimizada**: Sistema de cache inteligente para reduzir chamadas à API
 
 ## 🛠️ Configuração
 
@@ -71,18 +71,18 @@ python app.py
 - **Gráfico de Gêneros**: Distribuição dos seus gêneros musicais favoritos (pizza/donut)
 - **Horários de Escuta**: Padrão temporal de quando você mais ouve música (linha)
 - **Características de Áudio**: Gráfico radar com 7 características sonoras principais
-  - 🕺 Dançabilidade - 🔥 Energia - 🗣️ Fala - 🎸 Acústico - 🎼 Instrumental - 🎤 Ao Vivo - 😊 Positividade
+  - Dançabilidade - Energia - Fala - Acústico - Instrumental - Ao Vivo - Positividade
 - **Top Lists**: Suas músicas e artistas mais tocados com imagens e índices de popularidade
 
 ### Análises Disponíveis
 
-- 🎭 **Diversidade**: Quantos gêneros diferentes você escuta
-- ⏰ **Padrões temporais**: Seus horários de pico de escuta
-- 🎯 **Perfil sonoro**: Características detalhadas das suas músicas favoritas
-- 📈 **Sistema de Score**: Pontuação gamificada baseada na sua atividade musical
-- 🏆 **Conquistas**: Badges e achievements baseados nos seus hábitos de escuta
+- **Diversidade**: Quantos gêneros diferentes você escuta
+- **Padrões temporais**: Seus horários de pico de escuta
+- **Perfil sonoro**: Características detalhadas das suas músicas favoritas
+- **Sistema de Score**: Pontuação gamificada baseada na sua atividade musical
+- **Conquistas**: Badges e achievements baseados nos seus hábitos de escuta
 
-## 🔧 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 ### Backend
 
@@ -101,14 +101,14 @@ python app.py
 - **Spotify Web API** - Dados musicais
 - **OAuth 2.0** - Autenticação segura
 
-## 🎯 Próximos Passos
+## Próximos Passos
 
 - [ ] **GitHub Integration**: Dados de atividade de desenvolvimento
 - [ ] **Machine Learning**: Previsão de tendências musicais
 - [ ] **Tema Escuro**: Interface dark mode
 - [ ] **Deploy**: Heroku/Railway/Vercel
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Erro "Não foi possível resolver a importação"
 
